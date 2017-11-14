@@ -1,0 +1,99 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jenkins
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: tls
+  namespace: jenkins
+type: kubernetes.io/tls
+data:
+  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURHekNDQWdPZ0F3SUJBZ0lKQUp5QzNmMWNBOUF3TUEwR0NTcUdTSWIzRFFFQkN3VUFNQ1F4RURBT0JnTlYKQkFNTUIycGxibXRwYm5NeEVEQU9CZ05WQkFvTUIycGxibXRwYm5Nd0hoY05NVGN4TVRBMU1qQXhNVEUyV2hjTgpNVGd4TVRBMU1qQXhNVEUyV2pBa01SQXdEZ1lEVlFRRERBZHFaVzVyYVc1ek1SQXdEZ1lEVlFRS0RBZHFaVzVyCmFXNXpNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQTI3Yy91bHBoS04zbVhQSmIKL3ZrSDkwNk9iNC81aENlSEZ6U1U5Z2VyS21SSjBjTmwvM0Irc1MxSzZFV2dxTXJ1cVF1aEg0NnQrdVk2Nlk2RwpCbUhnV3FWYUl3U0ovWWllR1d6aHoxVktVZ2EyNlNucVpGcTVndnBWeVpWS0NEWUxnRFVTOXVpaGhwS3J0cjFoCmcxRWs1c2hBaWFVaisxQmt6OFBnVTU3bGt4dnBmbmxYalYzLzJxODVvSmFBbHNJRTRuc1BkWU1kUjcyei9ESjEKdTRxcVRKMThTUEQrVE5WU3RMbHZHZFFuTFAyM0RURmtsZm1saHlvWUR0Q3pvNVdadmdGL255bzgzWThYWDdIZwpEdTAvQ1JuN3h4cmJRaVdBV21xMmhDZi80NkQ1dTFmRlVqbGRJcWQ1Zm9IRjV0Wkg5dTBVUnlVNkI3ZXBzSzRoCjl5VU5pd0lEQVFBQm8xQXdUakFkQmdOVkhRNEVGZ1FVYkxTZHJ3SzFUd3dEVklZUHozK0N1emNhemRrd0h3WUQKVlIwakJCZ3dGb0FVYkxTZHJ3SzFUd3dEVklZUHozK0N1emNhemRrd0RBWURWUjBUQkFVd0F3RUIvekFOQmdrcQpoa2lHOXcwQkFRc0ZBQU9DQVFFQWpNalZTOWxEMnlLRjE5SVkrd0Fvb3ViYlEvNGkvcWVXS25FYVRzSDIvenEzClc0QmxuUTFWUUM1Q0N0ZHFnR1RPS1lRWEs1QjNXbk1SUWxCVkJDY1dUbkNZV09rNnVyRlB1V0xBVUFzbHhiNVYKNUNjK2FvU3Q3am9aQWN4S0RrSTh1UU5TM1NBcWNtTDNVaTVJdWxrM25yQzVOK0VLejBzUlZLQXBZanoxVUlaWgppTWZDRmQ0V0c2T01nZzFxUG5ya2pjZ2pJR2YyeldKeUcrd2I2Q0VoYmkxVm8vT0tIOWhUTDVxakw4VThiTVN3CjVXbUQ3MHZqcTZXbUk2Ukd3RXVVaFZaZnNubHlvQUIzNTlVWFFnQjB0YU5HTTdEMEltQnBwblJvSmVUbXUrTWoKamdNUHJFTnpuQzhtZlU4S3lTcmFUTUI2UEJlbjg3MEkvQUtHSkdxVGlnPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+  tls.key: LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2d0lCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktrd2dnU2xBZ0VBQW9JQkFRRGJ0eis2V21FbzNlWmMKOGx2KytRZjNUbzV2ai9tRUo0Y1hOSlQyQjZzcVpFblJ3MlgvY0g2eExVcm9SYUNveXU2cEM2RWZqcTM2NWpycApqb1lHWWVCYXBWb2pCSW45aUo0WmJPSFBWVXBTQnJicEtlcGtXcm1DK2xYSmxVb0lOZ3VBTlJMMjZLR0drcXUyCnZXR0RVU1RteUVDSnBTUDdVR1RQdytCVG51V1RHK2wrZVZlTlhmL2Fyem1nbG9DV3dnVGlldzkxZ3gxSHZiUDgKTW5XN2lxcE1uWHhJOFA1TTFWSzB1VzhaMUNjcy9iY05NV1NWK2FXSEtoZ08wTE9qbFptK0FYK2ZLanpkanhkZgpzZUFPN1Q4SkdmdkhHdHRDSllCYWFyYUVKLy9qb1BtN1Y4VlNPVjBpcDNsK2djWG0xa2YyN1JSSEpUb0h0Nm13CnJpSDNKUTJMQWdNQkFBRUNnZ0VCQUtkNUhHaE5MN1hZdmhpbTI1eVQ4WkIrSG0vSERHZkJRV1ZjdlJaemJmS1kKRXZTQ3ZpSmdleEZOOXNUcEhiYkxSL011WEJnVHgyVnhUQUp1a3BZVzBNNEhMNWQxaEVEdWU2UGhySlUrNjdGdQpVTW1WRzRaMjZPUi9NQmpCWkhheHl6NWtOaHBoNDQwU0N6VDFVWGlveHpucDlkZDFPdUg2dTN6cVR2a3VLc3RmCmx3VDlFRkFiNmQrUEdnME5FR2twZ2VqcW4yM1RkajRXWXdGNEExaHhSRllsQUp0ZjJTaFBzVzA3YzljcVlwTzIKZmRyWGxNV0pRYk5hd3YrYThBd1VieVRjZmlqL1BhWE04RlVzSS9ZOHFFaUkvQ042NTBFUi8wNDExTm8zbDBLeQpRYXpWMmV6QTJzbi9LUm1JZHpTbXpVdzczUXZQU29ZVU95Z0pZdVZyaTNFQ2dZRUErM1BlcE96SjF6VW1FREJGCjhRWVVSN2MzQndvZGlZWGlsVzFrRXd5U29kTVU5N0RJTHB2a1pyTmJHM1U5Ylg3WEhSWnk0aWNEci9QQWNOS0MKUGRoYmhDTVhmdUxrS3VvMkhIUXp6REdGVXgvQ2RLWnpDY21GZnlxVTRnZ2NrNmUyeGVqR2d5dmNodGh1R2ZZRwpxLzNQVFNTbW9CTFlNWWJaRWRIMjh4VHVZTThDZ1lFQTM3QnpLMWJLdkxFc2xLMS9nWVd6c3RoOUZ2WU9oMGFYCjA0WEN6MGk2U1Z0TkJDTG5VekRISXVXRUtZRWRSVmxIc0ZUZUdhaDF2aW9PYzdoVnpPM2w4MmdKcXhxa3JlYUwKQkdacFZsSDYwdTF5QjRld0RoWWh3QStZVVZmRkJhcWh0TkQxNzBVV0lPd0MrVTFBYTJDVG1pbjVQNmc3QUxUeApaNlVocU9Eam5vVUNnWUE5VHV3TEZEekdQd3d2eUVWVlZlRWQ5enJ3ZVhQb012K2k1VkFRSVBHamlSN0VvWks5ClluOFcxMFl3ZEs1c2d3K1o1UDVQeTZsbmZpditsaVR4UlU1UzhtZHBKWkx5TDdiUHl6bFI0UVViMWxPSU00azYKNnFxazdkSHRKb01wTVN3c0p1dzMwVHJzbWRxR2MraitpRnpCOTF5MURNTXZtQ3hXM3ZXeUlQbGFHd0tCZ1FDQQpFTlNQSG55cDlVSFJ5VmN6djJsM1hreVhwYjRCb3QvdndTZ2Nac1lJazVZUFpUQk5SNkxyRHI1UXlOUUtUU2duCkF4KzVUdUpDUW0vTnZ0NlltaWRKNk9tSUpaUGM0QjM5SWVqeSs3Si9xbVBiZmNyRTlkVFMwZHJoeno5RWxFRksKZFV3b2RjUktpdlRVNkc2V1MwK1dOcXUxejBvZ2lIZWhZRUJhSUk4UXhRS0JnUURXLzN5Wm1IUFozNFlsY0tuVQo1WG1qWHZwWlpMT0pWSnNDeFhBVUx3UVE2OXZRVGRmVWJuK0RVL2p6OFYxNG5Xamh6MGNCb29UVGNiSXVsMUlkClVaQkN6QTltSUlENjhmSS9FNXlmdWI4aWtxZC82RXZCZmJCWWhBbzhUSjQyejF1T0ZkSnJjc2pvdFBjZW94bTcKcjk2Z0M1SUVkUXNlVU14ZUFtN1d0aWhpS3c9PQotLS0tLUVORCBQUklWQVRFIEtFWS0tLS0tCg==
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: jenkins
+  namespace: jenkins
+spec:
+  tls:
+  - secretName: tls
+  backend:
+    serviceName: jenkins-ui
+    servicePort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-ui
+  namespace: jenkins
+spec:
+  type: NodePort
+  selector:
+    app: master
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+    name: ui
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-discovery
+  namespace: jenkins
+spec:
+  selector:
+    app: master
+  ports:
+  - protocol: TCP
+    port: 50000
+    targetPort: 50000
+    name: slaves
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: jenkins
+  namespace: jenkins
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: master
+    spec:
+      containers:
+      - name: master
+        image: gcr.io/refined-oven-169818/jenkins-master:5
+        ports:
+        - containerPort: 8080
+        - containerPort: 50000
+        readinessProbe:
+          httpGet:
+            path: /login
+            port: 8080
+          periodSeconds: 30
+          timeoutSeconds: 30
+          successThreshold: 2
+          failureThreshold: 5
+        volumeMounts:
+        - mountPath: /var/jenkins_home
+          name: jenkins-home
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1500Mi
+          requests:
+            cpu: 1000m
+            memory: 1500Mi
+      securityContext:
+        fsGroup: 1000
+      volumes:
+      - name: jenkins-home
+        gcePersistentDisk:
+          pdName: jenkins-home
+          fsType: ext4

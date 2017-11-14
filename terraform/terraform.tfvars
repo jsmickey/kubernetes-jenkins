@@ -1,0 +1,10 @@
+cluster_initial_node_count = 1
+cluster_min_master_version = "1.7.9-gke.0"
+cluster_name = "jenkins"
+cluster_node_config_machine_type = "n1-standard-4"
+cluster_node_version = "1.7.9-gke.0"
+cluster_zone = "us-central1-a"
+disk_name = "jenkins-home"
+disk_size = 10
+disk_type = "pd-standard"
+disk_zone = "us-central1-a"
