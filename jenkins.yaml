@@ -68,7 +68,7 @@ spec:
     spec:
       containers:
       - name: master
-        image: gcr.io/refined-oven-169818/jenkins-master:5
+        image: gcr.io/refined-oven-169818/jenkins-master:10
         ports:
         - containerPort: 8080
         - containerPort: 50000

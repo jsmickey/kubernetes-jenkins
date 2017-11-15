@@ -1,8 +1,7 @@
 Build Jenkins Master docker container
 
-docker build . -t jenkins-master:<version>
-docker tag jenkins-master:<version> gcr.io/<gcp project>/jenkins-master:<version>
-gcloud docker -- push gcr.io/<gcp project>/jenkins-master:<version>
+docker build . -t jenkins-master:%version% -t gcr.io/%gcp project%/jenkins-master:%version%
+gcloud docker -- push gcr.io/%gcp project%/jenkins-master:%version%
 
 Build cluster and storage
 terraform init
@@ -18,7 +17,7 @@ kubectl apply -f namespace.yaml
 
 Add and enable Jenkins namespace to kubectl config
 
-kubectl config set-context jenkins --namespace=jenkins  --cluster=gke_<gcp project>_us-central1-a_jenkins --user=gke_<gcp project>_us-central1-a_jenkins
+kubectl config set-context jenkins --namespace=jenkins  --cluster=gke_%gcp project%_us-central1-a_jenkins --user=gke_%gcp project%_us-central1-a_jenkins
 
 kubectl config set-context $(kubectl config current-context) --namespace=jenkins
 
