@@ -1,14 +1,22 @@
-##### Build Jenkins Master docker container
-```
-docker build . -t jenkins-master:VERSION -t gcr.io/GCP_PROJECT/jenkins-master:VERSION
-gcloud docker -- push gcr.io/GCP_PROJECT/jenkins-master:VERSION
-```
+This project was created to demonstate building Jenkins as a Docker container running on a GCP Kubernetes cluster with dynamic slaves managed by Kubernetes.  Declarative infrastructure as a code is used with Terraform and Kubernetes.  Please do not consider this to be production ready.  It is a demonstration and possibly a building block for a production system.
+
+##### Tools
+Bash (Most commands will work on Windows by default except for openssl)
+Google SDK https://cloud.google.com/sdk/
+Terraform https://www.terraform.io/docs/index.html
+Kubectl https://kubernetes.io/docs/user-guide/kubectl-overview/
 
 ##### Build cluster and storage
 ```
 terraform init
 terraform plan
 terraform apply
+```
+
+##### Build Jenkins Master docker container
+```
+docker build . -t jenkins-master:VERSION -t gcr.io/GCP_PROJECT/jenkins-master:VERSION
+gcloud docker -- push gcr.io/GCP_PROJECT/jenkins-master:VERSION
 ```
 
 ##### Fetch kubectl config
@@ -22,6 +30,7 @@ kubectl apply -f namespace.yaml
 ```
 
 ##### Add and enable Jenkins namespace to kubectl config
+This is an optional step.  If there are mulitple namespaces, the (-ns) option can be used with kubectl.
 ```
 kubectl config set-context jenkins --namespace=jenkins  --cluster=gke_GCP_PROJECT_us-central1-a_jenkins --user=gke_GCP_PROJECT_us-central1-a_jenkins
 kubectl config set-context $(kubectl config current-context) --namespace=jenkins
@@ -46,5 +55,6 @@ cat tls.crt | base64 -w0
 kubectl apply -f ingress.yaml
 ```
 
-##### Links
-https://cloud.google.com/solutions/configuring-jenkins-container-engine
+##### Links and Credit
+Kubernetes the Hard Way https://github.com/kelseyhightower/kubernetes-the-hard-way
+GCP Jenkins Documentation https://cloud.google.com/solutions/configuring-jenkins-container-engine
