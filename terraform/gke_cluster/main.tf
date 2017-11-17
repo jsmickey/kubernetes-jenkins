@@ -8,10 +8,12 @@ variable "disk_name" {}
 variable "disk_size" {}
 variable "disk_type" {}
 variable "disk_zone" {}
+variable "project" {}
+variable "region" {}
 
 provider "google" {
-  project = "refined-oven-169818"
-  region  = "us-central1"
+  project = "${var.project}"
+  region  = "${var.region}"
 }
 
 module "jenkins_disk" {

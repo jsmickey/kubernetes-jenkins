@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.allow-http: "false"
+  name: jenkins
+  namespace: jenkins
+spec:
+  tls:
+  - secretName: tls
+  backend:
+    serviceName: jenkins-ui
+    servicePort: 8080

@@ -13,8 +13,6 @@ COPY config.xml /usr/share/jenkins/ref/config.xml
 COPY credentials.xml /usr/share/jenkins/ref/credentials.xml
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
-COPY newuser.groovy /usr/share/jenkins/ref/init.groovy.d/newuser.groovy
-COPY disable_cli_remoting.groovy /usr/share/jenkins/ref/init.groovy.d/disable_cli_remoting.groovy
-COPY csrf_protection.groovy /usr/share/jenkins/ref/init.groovy.d/csrf_protection.groovy
-COPY slave_to_master_access_control.groovy /usr/share/jenkins/ref/init.groovy.d/slave_to_master_access_control.groovy
-COPY master_executors.groovy /usr/share/jenkins/ref/init.groovy.d/master_executors.groovy
+COPY groovy_scripts/* /usr/share/jenkins/ref/init.groovy.d/
+RUN mkdir -p /usr/share/jenkins/ref/jobs/sleep/
+COPY sleep_job.xml /usr/share/jenkins/ref/jobs/sleep/config.xml
