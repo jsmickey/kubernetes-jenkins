@@ -36,7 +36,7 @@ kubectl apply -f namespace.yaml
 ```
 
 ##### Add and enable Jenkins namespace to kubectl config
-This is an optional step.  If there are mulitple namespaces, the (-ns) option can be used with kubectl.
+This is an optional step.  If there are mulitple namespaces, the (-n) option can be used with kubectl.
 ```
 kubectl config set-context jenkins --namespace=jenkins  --cluster=gke_GCP_PROJECT_us-central1-a_jenkins --user=gke_GCP_PROJECT_us-central1-a_jenkins
 kubectl config set-context $(kubectl config current-context) --namespace=jenkins
@@ -45,7 +45,7 @@ kubectl config set-context $(kubectl config current-context) --namespace=jenkins
 ##### Deploy Jenkins Master
 ```
 kubectl apply -f deployment.yaml
-kubectl apply -f services.yaml
+kubectl apply -f service.yaml
 ```
 
 ##### Create Certificate
@@ -53,8 +53,6 @@ This is a self-signed certificate converted to
 ```
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=jenkins/O=jenkins"
 kubectl create secret generic tls --from-file=tls.crt --from-file=tls.key
-cat tls.key | base64 -w0
-cat tls.crt | base64 -w0
 ```
 
 ##### Deploy Load Balancer

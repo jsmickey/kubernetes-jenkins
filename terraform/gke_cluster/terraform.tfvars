@@ -1,8 +1,8 @@
-cluster_initial_node_count = 1
-cluster_min_master_version = "1.7.9-gke.0"
+cluster_initial_node_count = 3
+cluster_min_master_version = "1.8.4-gke.0"
 cluster_name = "jenkins"
 cluster_node_config_machine_type = "n1-standard-4"
-cluster_node_version = "1.7.9-gke.0"
+cluster_node_version = "1.8.4-gke.0" # gcloud container get-server-config
 cluster_zone = "us-central1-a"
 disk_name = "jenkins-home"
 disk_size = 10
