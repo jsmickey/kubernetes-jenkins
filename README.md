@@ -1,27 +1,44 @@
-This project was created to demonstate building Jenkins as a Docker container running on a GCP Kubernetes cluster with dynamic slaves managed by Kubernetes.  Declarative infrastructure as a code is used with Terraform and Kubernetes.  Please do not consider this to be production ready.  It is a demonstration and possibly a building block for a production system.
+## Jenkins on Kubernetes
 
-##### Tools
+* This project was created to demonstate building Jenkins as a Docker container running on a GCP Kubernetes cluster with dynamic slaves managed by Kubernetes
+* Declarative infrastructure as a code is used with Terraform and Kubernetes
+* Please do not consider this to be production ready - it is a demonstration and possibly a building block for a production system.
+
+#### Tools
 * Bash (Most commands will work on Windows by default except for openssl)
 * Google SDK https://cloud.google.com/sdk/
 * Terraform https://www.terraform.io/docs/index.html
 * Kubectl https://kubernetes.io/docs/user-guide/kubectl-overview/
 
-##### Build cluster and storage
-Use the terraform documentation to configure the GCP provider
+#### Build cluster and storage
+* Use the terraform documentation to configure the GCP provider
+* Initialize and configure gcloud including GCP Project
 ```
+GCP_PROJECT=$(gcloud config list --format 'value(core.project)')
+cd terraform/gke_cluster/
 terraform init
-terraform plan
-terraform apply
+terraform plan -var "project=$GCP_PROJECT"
+terraform apply -var "project=$GCP_PROJECT"
+cd ../..
 ```
 
-##### Build Jenkins Master docker container
+#### Build Jenkins Master docker container
 * Manage plugin installations and versions
 * Configure Jenkins Master to use Kubernetes for slaves
 * Mitigate Jenkins security alerts
 * Upload container to GCP Container Registry
 ```
-docker build . -t jenkins-master:VERSION -t gcr.io/GCP_PROJECT/jenkins-master:VERSION
-gcloud docker -- push gcr.io/GCP_PROJECT/jenkins-master:VERSION
+cd docker
+VERSION=$(date "+%Y%m%d%H%M")
+docker build . -t jenkins-master:$VERSION -t gcr.io/$GCP_PROJECT/jenkins-master:$VERSION
+gcloud docker -- push gcr.io/$GCP_PROJECT/jenkins-master:$VERSION
+cd ..
+```
+
+##### Set gcp project and version in deployment.yaml
+```
+sed -i "s#GCP_PROJECT#$GCP_PROJECT#g" deployment.yaml
+sed -i "s#VERSION#$VERSION#g" deployment.yaml
 ```
 
 ##### Fetch kubectl config
@@ -52,7 +69,7 @@ kubectl apply -f service.yaml
 This is a self-signed certificate converted to 
 ```
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=jenkins/O=jenkins"
-kubectl create secret generic tls --from-file=tls.crt --from-file=tls.key
+kubectl create secret generic tls --from-file=tls.crt --from-file=tls.key -n jenkins
 ```
 
 ##### Deploy Load Balancer
