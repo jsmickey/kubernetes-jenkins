@@ -8,5 +8,4 @@ disk_name = "jenkins-home"
 disk_size = 10
 disk_type = "pd-standard"
 disk_zone = "us-central1-a"
-#project = "refined-oven-169818"
 region  = "us-central1"
