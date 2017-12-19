@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: master
-        image: gcr.io/refined-oven-169818/jenkins-master:14
+        image: gcr.io/GCP_PROJECT/jenkins-master:VERSION
         ports:
         - containerPort: 8080
         - containerPort: 50000
